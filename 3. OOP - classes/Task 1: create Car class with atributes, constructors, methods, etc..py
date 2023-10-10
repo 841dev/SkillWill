@@ -1,11 +1,6 @@
 class Car:
 
-    __brand = 'Jeep'
-    __model = 'GC'
-    __production_year = 2011
-    __color = 'grey'
-    __horse_power = 295
-    __is_sport_car = False
+
     def __init__(self,
                  brand,
                  model,
@@ -55,24 +50,24 @@ class Car:
         else:
             return False
 
-car = Car('Jeep', 'GC', 2011, 'grey', 295, 'False')
+jeep = Car('Jeep', 'GC', 2011, 'grey', 295, 'False')
 
 
-print("Brand:", car.get_brand)
-print("Model:", car.get_model)
-print("Production Year:", car.get_production_year)
-print("Color:", car.get_color)
-print("Horse Power:", car.get_horse_power)
-print("Is Sport Car:", car.get_is_sport_car)
-
-print('\n')
-
-print(car.get_color)
-print(car.change_color('red'))
-print(car.get_color)
+print("Brand:", jeep.get_brand)
+print("Model:", jeep.get_model)
+print("Production Year:", jeep.get_production_year)
+print("Color:", jeep.get_color)
+print("Horse Power:", jeep.get_horse_power)
+print("Is Sport Car:", jeep.get_is_sport_car)
 
 print('\n')
 
-print(car.get_horse_power)
-print(car.increase_horse_power(20))
-print(car.get_horse_power)
+print(jeep.get_color)
+print(jeep.change_color('red'))
+print(jeep.get_color)
+
+print('\n')
+
+print(jeep.get_horse_power)
+print(jeep.increase_horse_power(20))
+print(jeep.get_horse_power)
