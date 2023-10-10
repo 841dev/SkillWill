@@ -50,7 +50,7 @@ class Car:
         else:
             return False
 
-jeep = Car('Jeep', 'GC', 2011, 'grey', 295, 'False')
+jeep = Car('Jeep', 'GC', 2011, 'grey', 295, False)
 
 
 print("Brand:", jeep.get_brand)
