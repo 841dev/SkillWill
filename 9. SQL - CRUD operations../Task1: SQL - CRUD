@@ -1,0 +1,8 @@
+SELECT * FROM cars;
+
+INSERT INTO cars (brand, model, year, engine)
+VALUES ('Jeep', 'Grand Cherokee', 2011, 3.6);
+
+UPDATE cars SET year = 2017, engine = 5.7 WHERE year = 2011;
+
+DELETE FROM cars WHERE year = 2017
