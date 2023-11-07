@@ -1,0 +1,55 @@
+CREATE TABLE Mobiles (
+id INTEGER ,
+Brand varchar(20) NOT NULL,
+Model varchar(20) NOT NULL,
+Color varchar(20) NOT NULL,
+Height float(4, 4) NOT NULL,
+Width float(4, 4) NOT NULL,
+Quantity INTEGER,
+Price float(4, 2) NOT NULL,
+PRIMARY KEY("id" AUTOINCREMENT));
+
+
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Xiaomi", 	"Mi 10 Lite 5G", 	"Blue", 	163.7,	74.8,	30,	850);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Xiaomi", 	"Mi 10 Lite 5G", 	"Gray", 	163.7,	74.8,	30,	850);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Xiaomi", 	"Mi 10 Lite 5G", 	"White", 	163.7,	74.8,	30,	850);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Xiaomi", 	"Mi 11 Lite 5G", 	"Black", 	160.5,	75.7,	50,	1200);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Xiaomi", 	"Mi 11 Lite 5G", 	"Green", 	160.5,	75.7,	40,	1200);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Xiaomi", 	"Mi 11 Lite 5G", 	"Yellow", 	160.5,	75.7,	40,	1200);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Samsung", 	"Galaxy M34 5G", 	"Blue", 	161.7,	77.2,	37,	450);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Samsung", 	"Galaxy M34 5G", 	"Silver", 	161.7,	77.2,	37,	450);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Samsung", 	"Galaxy S23",	"Black", 	146.3,	70.9,	65,	1890);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Samsung", 	"Galaxy S23",	"Lavender",	146.3,	70.9,	55,	1890);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Samsung", 	"Galaxy S23+",	"Lavender",	157.8,	76.2,	87,	2100);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Samsung", 	"Galaxy S23+",	"Lime",	157.8,	76.2,	77,	2100);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Samsung", 	"Galaxy S23 Ultra",	"Cream", 163.4,	78.1,	80,	2700);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Samsung", 	"Galaxy S23 Ultra",	"Red",	163.4,	78.1,	73,	2700);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Apple", 	"iPhone 15 Pro",	"Black",  146.6,	70.6,	90,	3700);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Apple", 	"iPhone 15 Pro",	"Blue",  146.6,	70.6,	85,	3700);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Apple", 	"iPhone 15",	"Pink",	147.6,	71.6,	85,	3100);
+INSERT INTO Mobiles ("Brand", "Model", "Color", "Height", "Width", "Quantity", "Price")
+VALUES ("Apple", 	"iPhone 15",	"Green", 	147.6,	71.6,	83,	3100);
+
+
+SELECT * FROM Mobiles WHERE "Price" > 600;
+SELECT * FROM Mobiles WHERE "Quantity" > 2 AND "Color" = "Blue";
+
+select id, Brand, Model, Color, Height, Width, Quantity, Price,  Price * Quantity as total_price from Mobiles;
+select id, Brand, Model, Color, Height, Width, Quantity, Price,  Height * Width as area from Mobiles where area > 10;
