@@ -1,0 +1,65 @@
+CREATE TABLE "Geners" (
+	"id"	INTEGER,
+	"gener_name"	varchar(20) NOT NULL UNIQUE,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Books" (
+	"id"	INTEGER,
+	"book_name"	varchar(50) NOT NULL,
+	"book_short_description"	varchar(100),
+	"gener_id"	INTEGER,
+	FOREIGN KEY("gener_id") REFERENCES "Geners"("id") ON DELETE SET NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Writer" (
+	"id"	INTEGER,
+	"first_name"	varchar(20) NOT NULL,
+	"last_name"	varchar(20) NOT NULL,
+	"book_id"	INTEGER NOT NULL,
+	"write_date"	date,
+	FOREIGN KEY("book_id") REFERENCES "Books"("id"),
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Library_branches" (
+	"id"	INTEGER,
+	"library_name"	varchar(30) NOT NULL,
+	"library_address"	varchar(70),
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Members" (
+	"id"	INTEGER,
+	"first_name"	varchar(20) NOT NULL,
+	"last_name"	varchar(20) NOT NULL,
+	"personal_id"	INTEGER(11) NOT NULL UNIQUE,
+	"registration_date"	date NOT NULL,
+	"library_id"	INTEGER NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT),
+	FOREIGN KEY("library_id") REFERENCES "Library_branches"("id")
+);
+
+CREATE TABLE "Sections" (
+	"id"	INTEGER,
+	"section_name"	varchar(20) NOT NULL,
+	"book_id"	INTEGER NOT NULL,
+	"book_quantity"	INTEGER,
+	"library_id"	INTEGER,
+	FOREIGN KEY("book_id") REFERENCES "Books"("id") ON DELETE SET NULL,
+	FOREIGN KEY("library_id") REFERENCES "Library_branches"("id") ON DELETE SET NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Staff" (
+	"id"	INTEGER,
+	"first_name"	varchar(20) NOT NULL,
+	"last_name"	varchar(20) NOT NULL,
+	"personal_id"	INTEGER(11) NOT NULL UNIQUE,
+	"woking_library_id"	INTEGER NOT NULL,
+	FOREIGN KEY("woking_library_id") REFERENCES "Library_branches"("id") ON DELETE SET NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+
