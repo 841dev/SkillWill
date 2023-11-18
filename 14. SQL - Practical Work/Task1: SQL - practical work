@@ -63,3 +63,48 @@ CREATE TABLE "Staff" (
 );
 
 
+INSERT INTO Library_branches ("library_name", "library_address")
+VALUES ("Vake Library", "z.paliashvili street");
+INSERT INTO Library_branches ("library_name", "library_address")
+VALUES ("Mediateka", "i.chavchavadze street");
+INSERT INTO Library_branches ("library_name", "library_address")
+VALUES ("Saburtalo Library", "pekini street");
+INSERT INTO Library_branches ("library_name", "library_address")
+VALUES ("Technical Library", "m.kostava street");
+
+INSERT INTO Geners ("gener_name") VALUES ("Detective");
+INSERT INTO Geners ("gener_name") VALUES ("Real Story");
+INSERT INTO Geners ("gener_name") VALUES ("Fantasy");
+INSERT INTO Geners ("gener_name") VALUES ("For Children");
+INSERT INTO Geners ("gener_name") VALUES ("Comics");
+
+INSERT INTO Books ("book_name", "book_short_description", "gener_id")
+VALUES ("artsivi", "igavaraki", 4);
+INSERT INTO Books ("book_name", "book_short_description", "gener_id")
+VALUES ("datvi", "Fantasy", 4);
+INSERT INTO Books ("book_name", "book_short_description", "gener_id")
+VALUES ("Final Fantasy 7", "Fantasy", 3);
+
+INSERT INTO Writer ("first_name", "last_name", "book_id", "write_date")
+VALUES ("Luka", "Razikashvili", 1, "1903-02-23");
+INSERT INTO Writer ("first_name", "last_name", "book_id", "write_date")
+VALUES ("Luka", "Razikashvili", 2, "1902-07-23");
+INSERT INTO Writer ("first_name", "last_name", "book_id", "write_date")
+VALUES ("Ilia", "Chavchavadze", 3, "2020-07-23");
+
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 1, 3, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 1, 4, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 2, 5, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 2, 3, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 2, 3, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 3, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 3, 4, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 3, 7, 2);
