@@ -1,6 +1,6 @@
-CREATE TABLE "Geners" (
+CREATE TABLE "Genres" (
 	"id"	INTEGER,
-	"gener_name"	varchar(20) NOT NULL UNIQUE,
+	"genre_name"	varchar(20) NOT NULL UNIQUE,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
@@ -8,12 +8,12 @@ CREATE TABLE "Books" (
 	"id"	INTEGER,
 	"book_name"	varchar(50) NOT NULL,
 	"book_short_description"	varchar(100),
-	"gener_id"	INTEGER,
-	FOREIGN KEY("gener_id") REFERENCES "Geners"("id") ON DELETE SET NULL,
+	"genre_id"	INTEGER,
+	FOREIGN KEY("genre_id") REFERENCES "Genres"("id") ON DELETE SET NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-CREATE TABLE "Writer" (
+CREATE TABLE "Author" (
 	"id"	INTEGER,
 	"first_name"	varchar(20) NOT NULL,
 	"last_name"	varchar(20) NOT NULL,
@@ -57,45 +57,168 @@ CREATE TABLE "Staff" (
 	"first_name"	varchar(20) NOT NULL,
 	"last_name"	varchar(20) NOT NULL,
 	"personal_id"	INTEGER(11) NOT NULL UNIQUE,
-	"woking_library_id"	INTEGER NOT NULL,
-	FOREIGN KEY("woking_library_id") REFERENCES "Library_branches"("id") ON DELETE SET NULL,
+	"working_library_id"	INTEGER NOT NULL,
+	FOREIGN KEY("working_library_id") REFERENCES "Library_branches"("id") ON DELETE SET NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
+CREATE TABLE "Rental" (
+	"id"	INTEGER,
+	"member_id"	INTEGER NOT NULL,
+	"book_id"	INTEGER NOT NULL,
+	"rental_date"	date NOT NULL,
+	"return_date"	date,
+	FOREIGN KEY("book_id") REFERENCES "Books"("id"),
+	FOREIGN KEY("member_id") REFERENCES "Members"("id"),
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Payment" (
+	"id"	INTEGER,
+	"member_id"	INTEGER NOT NULL,
+	"rental_id"	INTEGER NOT NULL,
+	"payment_date"	date NOT NULL,
+	"amount"	float(3, 2) NOT NULL,
+	FOREIGN KEY("rental_id") REFERENCES "Rental"("id"),
+	PRIMARY KEY("id" AUTOINCREMENT),
+	FOREIGN KEY("member_id") REFERENCES "Members"("id")
+);
 
 INSERT INTO Library_branches ("library_name", "library_address")
-VALUES ("Vake Library", "z.paliashvili street");
+VALUES ("Vake Library", "Z.Paliashvili street");
 INSERT INTO Library_branches ("library_name", "library_address")
-VALUES ("Mediateka", "i.chavchavadze street");
+VALUES ("Mediateka", "I.Chavchavadze street");
 INSERT INTO Library_branches ("library_name", "library_address")
-VALUES ("Saburtalo Library", "pekini street");
+VALUES ("Saburtalo Library", "Pekini street");
 INSERT INTO Library_branches ("library_name", "library_address")
-VALUES ("Technical Library", "m.kostava street");
+VALUES ("Technical Library", "M.Kostava street");
 
-INSERT INTO Geners ("gener_name") VALUES ("Detective");
-INSERT INTO Geners ("gener_name") VALUES ("Real Story");
-INSERT INTO Geners ("gener_name") VALUES ("Fantasy");
-INSERT INTO Geners ("gener_name") VALUES ("For Children");
-INSERT INTO Geners ("gener_name") VALUES ("Comics");
+INSERT INTO Genres (genre_name)
+VALUES ('Fantasy');
+INSERT INTO Genres (genre_name)
+VALUES ('Magic');
+INSERT INTO Genres (genre_name)
+VALUES ('Adventure');
+INSERT INTO Genres (genre_name)
+VALUES ('Drama');
+INSERT INTO Genres (genre_name)
+VALUES ('Dystopian');
+INSERT INTO Genres (genre_name)
+VALUES ('Romance');
+INSERT INTO Genres (genre_name)
+VALUES ('Classic');
+INSERT INTO Genres (genre_name)
+VALUES ('Sci-Fi');
+INSERT INTO Genres (genre_name)
+VALUES ('Horror');
+INSERT INTO Genres (genre_name)
+VALUES ('Comics');
+INSERT INTO Genres (genre_name)
+VALUES ('Epic');
 
-INSERT INTO Books ("book_name", "book_short_description", "gener_id")
-VALUES ("artsivi", "igavaraki", 4);
-INSERT INTO Books ("book_name", "book_short_description", "gener_id")
-VALUES ("datvi", "Fantasy", 4);
-INSERT INTO Books ("book_name", "book_short_description", "gener_id")
-VALUES ("Final Fantasy 7", "Fantasy", 3);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('The Great Gatsby', 'A classic novel set in the Roaring Twenties', 3);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('The Da Vinci Code', 'A mystery thriller', 4);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Dune', 'A science fiction masterpiece', 5);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Pride and Prejudice', 'A classic romance novel', 3);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Final Fantasy 7', 'Fantasy', 1);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Harry Potter', 'Magic', 2);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('The Lord of the Rings', 'Adventure', 3);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('To Kill a Mockingbird', 'Drama', 4);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('1984', 'Dystopian', 5);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('The Hobbit', 'An Unexpected Journey', 1);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Harry Potter and the Philosophers Stone', 'Magical adventures at Hogwarts', 2);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('The Lord of the Rings', 'One ring to rule them all', 3);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('To Kill a Mockingbird', 'Legal drama in the American South', 4);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('1984', 'Dystopian future under a totalitarian regime', 5);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Pride and Prejudice', 'Love and social class in early 19th-century England', 6);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Wuthering Heights', 'Romantic tragedy on the Yorkshire moors', 6);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('To Kill a Mockingbird', 'Legal drama in the American South', 4);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('The Great Gatsby', 'Roaring twenties and the American Dream', 7);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Pride and Prejudice', 'Love and social class in early 19th-century England', 6);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Brave New World', 'Dystopian society', 5);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Neuromancer', 'Cyberpunk novel', 8);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('Frankenstein', 'Scientific exploration and its consequences', 9);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('The Odyssey', 'Epic poem of Odysseus journey', 11);
+INSERT INTO Books (book_name, book_short_description, genre_id)
+VALUES ('The Iliad', 'Ancient Greek war epic', 11);
 
-INSERT INTO Writer ("first_name", "last_name", "book_id", "write_date")
-VALUES ("Luka", "Razikashvili", 1, "1903-02-23");
-INSERT INTO Writer ("first_name", "last_name", "book_id", "write_date")
-VALUES ("Luka", "Razikashvili", 2, "1902-07-23");
-INSERT INTO Writer ("first_name", "last_name", "book_id", "write_date")
-VALUES ("Ilia", "Chavchavadze", 3, "2020-07-23");
+
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('F. Scott', 'Fitzgerald', 1, '1926-04-10');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('F. Scott', 'Fitzgerald', 9, '1927-07-14');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('F. Scott', 'Fitzgerald', 16, '1928-04-15');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('F. Scott', 'Fitzgerald', 17, '1929-07-16');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('F. Scott', 'Fitzgerald', 23, '1930-07-16');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Dan', 'Brown', 2, '2003-03-18');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Dan', 'Brown', 10, '2005-03-18');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Dan', 'Brown', 18, '2007-03-14');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Frank', 'Herbert', 3, '1965-08-01');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Frank', 'Herbert', 11, '1967-08-01');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Frank', 'Herbert', 19, '1971-03-11');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Frank', 'Herbert', 20, '1977-06-21');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Jane', 'Austen', 4, '1813-01-28');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Jane', 'Austen', 12, '1819-01-18');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Jane', 'Austen', 21, '1821-05-18');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Robert', 'De Niro', 5, '1995-04-10');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Robert', 'De Niro', 13, '1996-04-10');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Robert', 'De Niro', 22, '1998-06-10');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Al', 'Pacino', 6, '2003-03-18');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Al', 'Pacino', 14, '2009-05-18');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Al', 'Pacino', 23, '2010-06-18');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Robert', 'Downey Jr', 7, '2005-04-06');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Robert', 'Downey Jr', 15, '2005-08-01');
+INSERT INTO Author (first_name, last_name, book_id, write_date)
+VALUES ('Brad', 'Austen', 8, '1813-01-28');
 
 INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
 VALUES ("Section A", 1, 3, 1);
 INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
-VALUES ("Section A", 1, 4, 3);
+VALUES ("Section A", 1, 4, 2);
 INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
 VALUES ("Section A", 2, 5, 1);
 INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
@@ -107,4 +230,282 @@ VALUES ("Section B", 3, 7, 2);
 INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
 VALUES ("Section B", 3, 4, 3);
 INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 3, 7, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
 VALUES ("Section B", 3, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 4, 3, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 4, 4, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 4, 5, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 4, 3, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section D", 5, 3, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section D", 5, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section D", 5, 4, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section D", 5, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section E", 6, 8, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section E", 6, 7, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section E", 6, 7, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 7, 5, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 7, 7, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 7, 4, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 8, 5, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 8, 4, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 8, 4, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 9, 5, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 9, 8, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 9, 3, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 10, 5, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 10, 4, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 10, 4, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 11, 3, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 11, 4, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 12, 5, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 12, 3, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 12, 3, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 13, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 13, 4, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 13, 7, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 13, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 14, 3, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 14, 4, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 14, 5, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 14, 3, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section D", 15, 3, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section D", 15, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section D", 15, 4, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section D", 15, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section E", 16, 8, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section E", 16, 7, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section E", 16, 7, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 17, 5, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 17, 7, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 17, 4, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 18, 5, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 18, 4, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 18, 4, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 19, 5, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 19, 8, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 19, 3, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 20, 5, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 20, 4, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 20, 4, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 21, 3, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 21, 4, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 22, 5, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 22, 3, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section A", 22, 3, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 23, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 23, 4, 3);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 23, 7, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section B", 23, 7, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 24, 3, 1);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 24, 4, 4);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 24, 5, 2);
+INSERT INTO Sections ("section_name", "book_id", "book_quantity", "library_id")
+VALUES ("Section C", 24, 3, 3);
+
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000001, "David", "Baiashvili", 1);
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000002, "Mariam", "Jioshvili", 1);
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000003, "Giorgi", "Izoria", 2);
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000004, "Nini", "Kokilashvili", 2);
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000005, "Nodar", "Tsomaia", 3);
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000006, "Mariam", "Tchavtchavadze", 3);
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000007, "Grigol", "Taniashvili", 4);
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000008, "Mariam", "Kakava", 4);
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000009, "Giorgi", "Tchkadua", 2);
+INSERT INTO Staff ("personal_id", "first_name", "last_name", "working_library_id")
+VALUES (01001000010, "Sopo", "Altunashvili", 3);
+
+
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('John', 'Doe', 123456789, '2023-01-01', 1);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Alice', 'Smith', 987654321, '2023-02-01', 2);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Bob', 'Johnson', 555123456, '2023-03-01', 3);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Eva', 'Davis', 111222333, '2023-04-01', 4);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Michael', 'Brown', 999888777, '2023-05-01', 1);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Sophia', 'Lee', 123987456, '2023-06-01', 2);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Daniel', 'Wang', 654789123, '2023-07-01', 3);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Olivia', 'Garcia', 333222111, '2023-08-01', 4);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('William', 'Kim', 777555888, '2023-09-01', 1);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Ava', 'Chen', 444111555, '2023-10-01', 2);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('James', 'Nguyen', 888777444, '2023-11-01', 3);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Emma', 'Patel', 222333444, '2023-12-01', 4);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Benjamin', 'Martinez', 666444222, '2023-01-01', 1);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Mia', 'Lopez', 123444555, '2023-02-01', 2);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Ethan', 'Smith', 987111222, '2023-03-01', 3);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Isabella', 'Wong', 555222333, '2023-04-01', 4);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Alexander', 'Johnson', 111999888, '2023-05-01', 1);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Sophia', 'Garcia', 666333222, '2023-06-01', 2);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Daniel', 'Kim', 222111333, '2023-07-01', 3);
+INSERT INTO Members (first_name, last_name, personal_id, registration_date, library_id)
+VALUES ('Olivia', 'Nguyen', 888555444, '2023-08-01', 4);
+
+
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (1, 5, '2023-01-15', '2023-02-05');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (2, 10, '2023-02-01', '2023-03-10');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (3, 15, '2023-03-12', '2023-04-02');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (4, 20, '2023-04-05', '2023-05-20');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (5, 1, '2023-05-10', '2023-06-01');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (6, 6, '2023-06-15', '2023-07-05');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (7, 11, '2023-07-20', '2023-08-10');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (8, 16, '2023-08-25', '2023-09-15');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (9, 21, '2023-09-30', '2023-10-20');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (10, 2, '2023-10-10', '2023-11-01');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (11, 7, '2023-11-15', null);
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (12, 12, '2023-01-20', '2023-03-10');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (13, 17, '2023-01-25', '2023-02-15');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (14, 22, '2023-02-28', '2023-03-20');
+INSERT INTO Rental (member_id, book_id, rental_date, return_date)
+VALUES (15, 3, '2023-03-10', '2023-04-01');
+
+
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (1, 1, '2023-02-05', 10.50);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (2, 2, '2023-03-10', 15.75);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (3, 3, '2023-04-02', 20.00);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (4, 4, '2023-05-20', 12.25);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (5, 5, '2023-06-01', 18.50);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (6, 6, '2023-07-05', 25.00);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (7, 7, '2023-08-10', 30.75);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (8, 8, '2023-09-15', 15.50);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (9, 9, '2023-10-20', 22.25);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (10, 10, '2023-11-01', 27.50);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (12, 12, '2023-03-10', 18.25);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (13, 13, '2023-02-15', 23.50);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (14, 14, '2023-03-20', 29.75);
+INSERT INTO Payment (member_id, rental_id, payment_date, amount)
+VALUES (15, 15, '2023-04-01', 10.00);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
