@@ -497,15 +497,13 @@ VALUES (15, 15, '2023-04-01', 10.00);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+select Members.first_name, Members.last_name, Books.book_name, Rental.rental_date, Rental.return_date, Payment.amount, Library_branches.library_name
+from Members
+inner join Rental
+on Members.id = Rental.member_id
+inner join Books
+on Rental.book_id = Books.id
+inner join Payment
+on Rental.id = Payment.rental_id
+inner join Library_branches
+on Members.library_id = Library_branches.id;
