@@ -17,7 +17,7 @@ class Authorization():
         print("Please enter your Username and Passwod ")
 
         self.user_name = input(" Please enter user name:  ")
-        self.user_pass = input(" Please enter a password:  ")
+
 
         self.access_granted = False
 
@@ -27,6 +27,7 @@ class Authorization():
             for i in data["users"]:
                 # print(data["users"][x].get("username"))
                 if self.user_name == data["users"][x].get("username"):
+                    self.user_pass = input(" Please enter a password:  ")
                     if self.user_pass == data["users"][x].get("userpass"):
                         print("Welcome")
                         # print(f'Logged in user ID is: {data["users"][x].get("id")}')
