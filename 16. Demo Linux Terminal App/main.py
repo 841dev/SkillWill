@@ -60,14 +60,22 @@ class Authorization():
         }
         with open('users.json', 'r') as file:
             data = json.load(file)
-            x=0
-            #print(len(data["users"][x].get("username")))
+            u=0
+
             for i in data["users"]:
-                if self.user_name == data["users"][x].get("username"):
+                if self.user_name == data["users"][u].get("username"):
                     print("This user name is already in use, next time please chose different user name and try again.")
                     self.register()
                 else:
-                    x=x+1
+                    u=u+1
+
+            m=0
+            for i in data["users"]:
+                if self.user_mail == data["users"][m].get("mail"):
+                    print("This mail is already in use, next time please chose different mail and try again.")
+                    self.register()
+                else:
+                    m=m+1
 
         #print("there is no such a user in db")
         data["users"].append(new_user)
