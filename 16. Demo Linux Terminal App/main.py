@@ -7,17 +7,15 @@ class Authorization():
     def __init__(self):
 
         self.first_of_all = {
-            "1":self.register,
-            "2":self.login,
-            "3":self.exit
+            "1": self.register,
+            "2": self.login,
+            "3": self.ext
         }
-
 
     def login(self):
         print("Please enter your Username and Passwod ")
 
         self.user_name = input(" Please enter user name:  ")
-
 
         self.access_granted = False
 
@@ -25,7 +23,6 @@ class Authorization():
             data = json.load(file)
             x = 0
             for i in data["users"]:
-                # print(data["users"][x].get("username"))
                 if self.user_name == data["users"][x].get("username"):
                     self.user_pass = input(" Please enter a password:  ")
                     if self.user_pass == data["users"][x].get("userpass"):
@@ -35,16 +32,17 @@ class Authorization():
                         break
                     else:
                         print("The password is incorrect, please try again")
-                        self.login()
+
                 else:
                     x = x + 1
 
-            if self.access_granted:
-                print("Access Granted")
-                print(f'Logged in user ID is: {data["users"][x].get("id")}')
-            else:
-                print(f"There is no such username ' {self.user_name} ' , please try again")
-                self.login()
+        if self.access_granted:
+            print("Access Granted")
+            print(f'Logged in user ID is: {data["users"][x].get("id")}')
+            exit()
+        else:
+            print(f"There is no such username ' {self.user_name} ' , please try again")
+            self.login()
 
     def register(self):
         print("New User Registration")
@@ -65,7 +63,6 @@ class Authorization():
             x=0
             #print(len(data["users"][x].get("username")))
             for i in data["users"]:
-                #print(len(i))
                 if self.user_name == data["users"][x].get("username"):
                     print("This user name is already in use, next time please chose different user name and try again.")
                     self.register()
@@ -101,7 +98,7 @@ class Authorization():
         else:
             print("{0} is not a valid choice".format(choice))
 
-    def exit(self):
+    def ext(self):
         exit()
 
 if __name__ == "__main__":
