@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reader</title>
+</head>
+<body>
+    <h1>This is reader</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" {% if form.errors %}
+                                disabled
+                                {% endif %}>Submit</button>
+    </form>
+</body>
+</html>
