@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from . models import animal
@@ -33,5 +31,3 @@ class DeleteAnimalView(APIView):
         event = animal.objects.get(pk=pk)
         event.dlete()
         return Response("Deletion Success")
-
-
