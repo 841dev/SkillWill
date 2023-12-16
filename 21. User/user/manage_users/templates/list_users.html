@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Users</title>
+</head>
+<body>
+    <h1> This is List Page</h1>
+    <br>
+    <h2> Here is the list of Users</h2>
+    {% for user in all_users%}
+    <ul>
+        <li>{{user.f_name}} {{user.l_name}} {{user.mail}}</li>
+    </ul>
+    {% endfor %}
+</body>
+</html>

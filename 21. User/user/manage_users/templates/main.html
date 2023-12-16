@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+</head>
+<body>
+    <h1> This is Main Page</h1>
+    <br>
+    <h2>What you want to do?</h2>
+    <br>
+    <ul>
+        <li><a href="{% url 'List_Users' %}"><pre>List Users</pre></a></li>
+        <li><a href="{% url 'Create_User' %}"><pre>Create User</pre></a> </li>
+        <li><a href="{% url 'Update_User' %}"><pre>Update User</pre></a></li>
+        <li><a href="{% url 'Delete_User' %}"><pre>Delete User</pre></a> </li>
+
+    </ul>
+</body>
+</html>
