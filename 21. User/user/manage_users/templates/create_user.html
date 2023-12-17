@@ -5,6 +5,14 @@
     <title>Create User</title>
 </head>
 <body>
-    <h1> This is Create Page</h1>
+    <h1>From this page you can create a user</h1>
+    <br>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" {% if form.errors %}
+                                disabled
+                                {% endif %}>Create</button>
+    </form>
 </body>
 </html>

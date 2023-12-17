@@ -5,6 +5,17 @@
     <title>Delete Users</title>
 </head>
 <body>
-    <h1> This is Delete Page</h1>
+    <h1>From this page you can delete a user</h1>
+    <br>
+    <button><a href="{% url 'List_Users' %}">List User</a></button>
+    <button><a href="{% url 'Create_User' %}">Create User</a></button>
+    <br>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" {% if form.errors %}
+                                disabled
+                                {% endif %}>Delete</button>
+    </form>
 </body>
 </html>

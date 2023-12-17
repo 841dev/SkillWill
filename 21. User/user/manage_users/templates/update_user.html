@@ -6,5 +6,11 @@
 </head>
 <body>
     <h1> This is Update Page</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }}
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+        <button type="submit">Update</button>
+    </form>
 </body>
 </html>
